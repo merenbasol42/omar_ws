@@ -1,6 +1,6 @@
 <launch>
 
-    <let name="my_pkg_path" value="$(find-pkg-share kasva_description)"/> <!-- paketin olduğu konum -->
+    <let name="my_pkg_path" value="$(find-pkg-share omar_description)"/> <!-- paketin olduğu konum -->
     <let name="urdf_path" value="$(var my_pkg_path)/urdf/display.urdf.xacro"/>
 
     <node pkg="robot_state_publisher" exec="robot_state_publisher">

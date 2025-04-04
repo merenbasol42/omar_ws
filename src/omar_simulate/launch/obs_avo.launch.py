@@ -14,9 +14,9 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
 
-    pkg_name = "kasva_simulate"
+    pkg_name = "omar_simulate"
     pkg_share = get_package_share_directory(pkg_name)
-    desc_pkg_name = "kasva_description"
+    desc_pkg_name = "omar_description"
     desc_pkg_share = get_package_share_directory(desc_pkg_name)
     
     models_path = os.path.join(

@@ -10,7 +10,7 @@ from launch.substitutions import PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
-pkg_name = "kasva_description"
+pkg_name = "omar_description"
 
 def generate_launch_description():
     # Paketin share dizinini al

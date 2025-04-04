@@ -8,7 +8,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
-    pkg_share = get_package_share_directory('kasva_description')
+    pkg_share = get_package_share_directory('omar_description')
     urdf_path = os.path.join(pkg_share, 'urdf', 'display.urdf.xacro')
     robot_desc = ParameterValue(Command(['xacro ', urdf_path]), value_type = str)
     
