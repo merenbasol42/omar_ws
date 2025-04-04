@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="ros">
+
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size="${camera_l_x} ${camera_l_y} ${camera_l_z}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="orange"/>            
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="${camera_l_x} ${camera_l_y} ${camera_l_z}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>               
+        </collision>
+
+        <xacro:box_inertia 
+            m="${camera_m}" lx="${camera_l_x}" ly="${camera_l_y}" lz="${camera_l_z}" 
+            xyz="0 0 0" rpy="0 0 0"
+        />
+    </link>
+
+    <joint name="chasis_camera_joint" type="fixed">
+        <parent link="chasis"/>
+        <child link="camera_link"/>
+        <origin xyz="${chasis_l_x / 2.0} 0 ${chasis_l_z / 2.0 - camera_l_z}" rpy="0 ${pi/4} 0"/>
+    </joint>
+
+    <!-- opencv ile çalışmak için kameranın x ekseni, z ekseni olması lazım çünkü görüntüyü öyle tasavvur ediyor -->
+    <link name="camera_optical_link">
+    </link>
+
+    <joint name="camera_optical_joint" type="fixed">
+        <parent link="camera_link"/>
+        <child link="camera_optical_link"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+
+</robot>

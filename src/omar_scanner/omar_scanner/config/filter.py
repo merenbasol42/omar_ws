@@ -1,0 +1,5 @@
+from .lidar import *
+
+ROTATE_ANGLE: float = 0
+FILTER_START_INDEX: float = RANGE.LEFT_INDEX 
+FILTER_STOP_INDEX: float = RANGE.RIGHT_INDEX

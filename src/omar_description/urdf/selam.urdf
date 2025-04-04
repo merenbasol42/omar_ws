@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<robot name="robo_deccal">
+
+    <material name="green">
+        <color rgba="0 0.5 0 0.8"/> <!-- red green blue alpha(opaklık) hepsi 1 ila 0 arasında değer almakta-->
+    </material>
+    
+    <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/> <!-- red green blue alpha(opaklık) hepsi 1 ila 0 arasında değer almakta-->
+    </material>
+
+    <link name="footprint">
+    </link>
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.6 0.4 0.2"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/> 
+            <material name="green"/>
+        </visual>
+    </link>
+
+    <link name="wheel_left">
+        <visual>
+            <geometry>
+                <cylinder radius="0.1" length="0.05"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/> <!-- la aganiga row'u negatif yapmanın manasi nedir acaba-->
+            <material name="gray"/>
+        </visual> 
+    </link>
+
+    <link name="wheel_right">
+        <visual>
+            <geometry>
+                <cylinder radius="0.1" length="0.05"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <material name="gray"/>
+        </visual> 
+    </link>
+
+    <link name="cwh_lf">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="gray"/>
+        </visual> 
+    </link>
+
+    <link name="cwh_rf">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="gray"/>
+        </visual> 
+    </link>
+
+    <link name="cwh_lb">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="gray"/>
+        </visual> 
+    </link>
+
+    <link name="cwh_rb">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="gray"/>
+        </visual> 
+    </link>
+
+    <!-- type="fixed" demek sanki tek parçaymış gibi birbirine bağlamak demektir -->
+
+    <!-- <joint name="base_second_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="second_link"/>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    </joint> -->
+
+    <!-- type="prismatic" demek child'i parent'ına bir eksen boyunca lineer hareket edecek şekilde birbirine bağlamak demektir -->
+<!-- 
+    <joint name="second_box2_joint" type="prismatic">
+        <parent link="second_link"/>
+        <child link="box2_link"/>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/> //eksen seçimi 
+        <limit lower="-0.2" upper="0.2" velocity="100" effort="100"/> //sınırların belirlenmesi
+    </joint>  -->
+
+    <!-- type="prismatic" demek child'i parent'ına bir eksen boyunca lineer hareket edecek şekilde birbirine bağlamak demektir -->
+<!--
+    <joint name="second_box2_joint" type="prismatic">
+        <parent link="second_link"/>
+        <child link="box2_link"/>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/> //eksen seçimi -
+        <limit lower="-0.2" upper="0.2" velocity="100" effort="100"/> //sınırların belirlenmesi
+    </joint> 
+-->
+
+    <!-- type="continuous" demek sanki revolute gibi ama sınırı yok. Örneği teker gibi. Tekerin dönüşünün maks veya min bir değeri yoktur -->
+
+    <joint name="footprint_TO_base" type="fixed">
+        <parent link="footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="base_TO_whell_left" type="continuous">
+        <parent link="base_link"/>
+        <child link="wheel_left"/>
+        <origin xyz="0 0.225 -0.1" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="base_TO_whell_right" type="continuous">
+        <parent link="base_link"/>
+        <child link="wheel_right"/>
+        <origin xyz="0 -0.225 -0.1" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="base_TO_cwh_lf" type="continuous">
+        <parent link="base_link"/>
+        <child link="cwh_lf"/>
+        <origin xyz="0.2275 0.1275 -0.15" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+    
+    <joint name="base_TO_cwh_rf" type="continuous">
+        <parent link="base_link"/>
+        <child link="cwh_rf"/>
+        <origin xyz="0.2275 -0.1275 -0.15" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="base_TO_cwh_lb" type="continuous">
+        <parent link="base_link"/>
+        <child link="cwh_lb"/>
+        <origin xyz="-0.2275 0.1275 -0.15" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="base_TO_cwh_rb" type="continuous">
+        <parent link="base_link"/>
+        <child link="cwh_rb"/>
+        <origin xyz="-0.2275 -0.1275 -0.15" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/> 
+    </joint>
+
+    <!-- type="revolute" demek sanki tek parçaymış lakin sonrasında takılan parça kendi eksenleri etrafında dönebilir şekilinde birbirine bağlamak demektir -->
+<!-- 
+    <joint name="second_box2_joint" type="revolute">
+        <parent link="second_link"/>
+        <child link="box2_link"/>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.57" upper="1.57" velocity="100" effort="100"/>
+    </joint>
+-->
+
+</robot>

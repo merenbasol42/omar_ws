@@ -1,0 +1,4 @@
+string commander
+bool target
+---
+bool success

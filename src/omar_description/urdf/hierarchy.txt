@@ -1,0 +1,45 @@
+
+every urdf has a launcher with has own names
+
+3 urdf
+    selam.urdf :: basic, hardcoded urdf for first test.
+    
+    display.urdf.xacro :: macro-used, clean urdf for display on RViz2.
+
+    gazebo.urdf.xacro :: macro-used, clean urdf for simulate on Gazebo.
+
+
+
+    selam.urdf
+        ---
+
+    display.urdf.xacro
+        common_props.xacro
+            ** common properties for general urdf. Like ineritias and color.
+
+        rd_props.xacro
+            ** private properties for entire robot. Like base_link length on x axis.
+        
+        links.xacro
+            ** all links defination for entire robot. 
+        
+        joints.xacro
+            ** all joint defination for entire robot.
+
+
+    gazebo.urdf.xacro 
+        common_props.xacro
+            ** common properties for general urdf. Like ineritias and color
+
+        rd_props.xacro
+            ** private properties for entire robot. Like base_link length on x axis.
+        
+        links.xacro
+            ** all links defination for entire robot. 
+        
+        joints.xacro
+            ** all joint defination for entire robot.
+
+        g_plugins.xacro
+            ** Gazebo plugins defination and configuration, for LIDAR and camera.
+

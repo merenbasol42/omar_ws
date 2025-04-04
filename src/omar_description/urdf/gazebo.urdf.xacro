@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robo_deccal">
+
+    <xacro:include filename="common_props.xacro"/>
+    <xacro:include filename="rd_props.xacro"/>
+    <xacro:include filename="links.xacro"/>
+    <xacro:include filename="joints.xacro"/>
+    <xacro:include filename="lidar.xacro"/>
+    <xacro:include filename="camera.xacro"/>
+    <xacro:include filename="g_plugins.xacro"/>
+
+</robot>

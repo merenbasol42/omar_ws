@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot name="my_robot" xmlns:xacro="ros">
+
+
+    <!-- Aganiga jointlerle döndürüyoz teker silindirlerini haberin olsun -->
+
+    <!-- macros -->
+    <xacro:macro name="base_TO_wheel" params="prefix yfactor">
+        <joint name="base_TO_${prefix}_wheel" type="continuous">
+            <parent link="base_link"/>
+            <child link="${prefix}_wheel_link"/>
+            <origin xyz="0 ${yfactor * (chasis_l_y + wheel_width) / 2.0} 0" rpy="${yfactor * pi / 2.0} 0 0"/> 
+            <axis xyz="0 0 ${-1 * yfactor}"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="chasis_TO_cwh" params="postfix xfactor yfactor">
+        <joint name="chasis_TO_cwh${postfix}" type="continuous">
+            <parent link="chasis"/>
+            <child link="cwh_${postfix}"/>
+            <origin xyz="${xfactor * (chasis_l_x / 2.0 - cwh_radius - cwh_fee)} ${yfactor * (chasis_l_y / 2.0 - cwh_radius - cwh_fee)} ${-(chasis_l_z / 2.0 + cwh_radius)}" rpy="0 0 0"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+    </xacro:macro>
+    
+    <!-- <xacro:macro name="base_TO_cwh" params="postfix xfactor yfactor">
+        <joint name="base_TO_cwh${postfix}" type="fixed">
+            <parent link="base_link"/>
+            <child link="cwh_${postfix}"/>
+            <origin xyz="${xfactor * (base_l_x / 2.0 - cwh_radius - cwh_fee)} ${yfactor * (base_l_y / 2.0 - cwh_radius - cwh_fee)} ${-(base_l_z / 2.0 + cwh_radius)}" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+     -->
+
+
+
+    <!-- joints -->
+     <joint name="base_TO_chasis" type="fixed">
+        <parent link="base_link"/>
+        <child link="chasis"/>
+        <origin xyz="0.0 0.0 ${chasis_l_z / 2.0}" rpy="0.0 0.0 0.0"/>
+     </joint>
+
+    <joint name="base_TO_footprint" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+        <origin xyz="0 0 ${-wheel_radius}" rpy="0 0 0"/>
+    </joint>
+
+    <xacro:base_TO_wheel prefix="left" yfactor="1"/>
+    <xacro:base_TO_wheel prefix="right" yfactor="-1"/>
+
+    <xacro:chasis_TO_cwh postfix="lf" xfactor="1" yfactor="1"/>
+    <xacro:chasis_TO_cwh postfix="rf" xfactor="1" yfactor="-1"/>
+    <xacro:chasis_TO_cwh postfix="lb" xfactor="-1" yfactor="1"/>
+    <xacro:chasis_TO_cwh postfix="rb" xfactor="-1" yfactor="-1"/>
+
+</robot>

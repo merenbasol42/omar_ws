@@ -1,0 +1,2 @@
+float32 extract_fps
+float32 publish_fps

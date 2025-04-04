@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- cwh= caster wheel -->
+
+    <!-- macros -->
+    <xacro:macro name="wheel_link" params="prefix">
+        <link name="${prefix}_wheel_link">
+            <visual>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/> 
+                <material name="gray"/>
+            </visual>
+            
+            <collision>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <material name="gray"/>
+            </collision>
+
+            <xacro:cylinder_inertia 
+                m="${wheel_m}" 
+                r="${wheel_radius}" l="${wheel_width}" 
+                xyz="0 0 0" rpy="0 0 0"
+            />
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="cwh_link" params="postfix">
+        <link name="cwh_${postfix}">
+            <visual>
+                <geometry>
+                    <sphere radius="${cwh_radius}" />
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <material name="gray"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <sphere radius="${cwh_radius}" />
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <material name="gray"/>
+            </collision>
+
+            <xacro:sphere_inertia 
+                m="${cwh_m}" 
+                r="${cwh_radius}" 
+                xyz="0 0 0" rpy="0 0 0"
+            />
+        </link>
+    </xacro:macro>
+
+
+
+
+    <!-- links -->
+    <link name="base_link">
+
+    </link>
+
+    <link name="base_footprint">
+        
+    </link>
+
+    <link name="chasis">
+        <visual>
+            <geometry>
+                <box size="${chasis_l_x} ${chasis_l_y} ${chasis_l_z}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="green"/>            
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="${chasis_l_x} ${chasis_l_y} ${chasis_l_z}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="green"/>                
+        </collision>
+
+        <xacro:box_inertia 
+            m="${chasis_m}" lx="${chasis_l_x}" ly="${chasis_l_y}" lz="${chasis_l_z}" 
+            xyz="0 0 0" rpy="0 0 0"
+        />
+    </link>
+
+    <xacro:wheel_link prefix="right"/>
+    <xacro:wheel_link prefix="left"/>
+    
+    <xacro:cwh_link postfix="lf"/>
+    <xacro:cwh_link postfix="rf"/>
+    <xacro:cwh_link postfix="lb"/>
+    <xacro:cwh_link postfix="rb"/>
+    
+</robot>

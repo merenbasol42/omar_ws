@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="yolwzemin">
+    <!-- Modelin tümüne uygulanacak pose: x y z roll pitch yaw -->
+    <pose>0 -4.5 0 1.57 0 1.57</pose>
+    
+    <!-- Model statik olsun, böylece fizik etkileşimine girmesin -->
+    <static>true</static>
+    <link name="link">
+      
+      <!-- Collision bilgisi mevcut, ancak çarpışmalar devre dışı bırakılıyor -->
+      <!-- <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>meshes/track.STL</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </collision> -->
+      
+      <!-- Görsel Tanımlama -->
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>meshes/robo_kasva_sekil_002.STL</uri>
+            <scale>0.003 0.003 0.003</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+      </visual>
+
+      <!-- Damping değerleri -->
+      <velocity_decay>
+        <linear>0.2</linear>
+        <angular>0.2</angular>
+      </velocity_decay>
+      
+      <!-- İnertial bilgileri -->
+      <inertial>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.005</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.005</iyy>
+          <iyz>0</iyz>
+          <izz>0.005</izz>
+        </inertia>
+        <pose>0 0 0 0 0 0</pose>
+      </inertial>
+      
+    </link>
+  </model>
+</sdf>
